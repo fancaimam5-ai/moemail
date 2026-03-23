@@ -1,0 +1,113 @@
+{
+  "privacy": {
+    "title": "Kebijakan Privasi",
+    "lastUpdated": "Terakhir diperbarui: Maret 2026",
+    "intro": "Di IfMail, kami menganggap serius privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda saat menggunakan layanan email sementara kami.",
+    "sections": {
+      "collect": {
+        "title": "Informasi yang Kami Kumpulkan",
+        "items": [
+          "Informasi akun (nama pengguna, email) saat Anda mendaftar",
+          "Alamat email sementara yang Anda buat",
+          "Pesan email yang diterima oleh alamat sementara Anda",
+          "Data penggunaan seperti waktu akses dan alamat IP"
+        ]
+      },
+      "use": {
+        "title": "Bagaimana Kami Menggunakan Informasi Anda",
+        "items": [
+          "Untuk menyediakan dan memelihara layanan email sementara",
+          "Untuk mengelola akun dan autentikasi Anda",
+          "Untuk meningkatkan layanan dan pengalaman pengguna kami",
+          "Untuk mengkomunikasikan pembaruan layanan penting"
+        ]
+      },
+      "retention": {
+        "title": "Penyimpanan Data",
+        "description": "Email sementara dan isinya secara otomatis dihapus setelah masa berlaku habis (1 jam, 24 jam, 3 hari, atau sesuai konfigurasi). Data akun disimpan selama Anda memiliki akun aktif."
+      },
+      "security": {
+        "title": "Keamanan Data",
+        "description": "Kami menerapkan langkah-langkah keamanan standar industri untuk melindungi data Anda. Layanan kami dibangun di infrastruktur Cloudflare, yang menyediakan keamanan tingkat perusahaan dan perlindungan DDoS."
+      },
+      "thirdParty": {
+        "title": "Layanan Pihak Ketiga",
+        "description": "Kami menggunakan Cloudflare untuk infrastruktur, hosting, dan routing email. Kami tidak menjual atau membagikan data pribadi Anda kepada pihak ketiga untuk tujuan pemasaran."
+      },
+      "contact": {
+        "title": "Hubungi Kami",
+        "description": "Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami melalui saluran admin kami."
+      }
+    }
+  },
+  "terms": {
+    "title": "Syarat & Ketentuan",
+    "lastUpdated": "Terakhir diperbarui: Maret 2026",
+    "intro": "Dengan menggunakan IfMail, Anda menyetujui Syarat & Ketentuan ini. Silakan baca dengan seksama.",
+    "sections": {
+      "service": {
+        "title": "Deskripsi Layanan",
+        "description": "IfMail menyediakan alamat email sementara dan sekali pakai untuk perlindungan privasi. Layanan ini memungkinkan pengguna membuat kotak surat sementara yang secara otomatis kedaluwarsa setelah periode yang ditentukan."
+      },
+      "acceptable": {
+        "title": "Penggunaan yang Dapat Diterima",
+        "items": [
+          "Anda dapat menggunakan layanan untuk tujuan perlindungan privasi yang sah",
+          "Anda tidak boleh menggunakan layanan untuk spam, phishing, atau aktivitas ilegal",
+          "Anda tidak boleh mencoba menyalahgunakan atau mengeksploitasi layanan",
+          "Anda tidak boleh menggunakan layanan untuk melecehkan atau merugikan orang lain"
+        ]
+      },
+      "accounts": {
+        "title": "Akun",
+        "description": "Akun terdaftar menyediakan fitur tambahan seperti mengelola beberapa email sementara. Anda bertanggung jawab untuk menjaga keamanan kredensial akun Anda."
+      },
+      "limitations": {
+        "title": "Batasan Layanan",
+        "description": "Email sementara tidak bersifat permanen. Kami tidak menjamin pengiriman semua email. Layanan disediakan 'apa adanya' tanpa jaminan dalam bentuk apa pun."
+      },
+      "termination": {
+        "title": "Penghentian",
+        "description": "Kami berhak menangguhkan atau menghentikan akun yang melanggar ketentuan ini. Anda dapat menghapus akun Anda kapan saja."
+      },
+      "changes": {
+        "title": "Perubahan Ketentuan",
+        "description": "Kami dapat memperbarui ketentuan ini dari waktu ke waktu. Penggunaan layanan yang berkelanjutan setelah perubahan merupakan penerimaan ketentuan baru."
+      }
+    }
+  },
+  "about": {
+    "title": "Tentang IfMail",
+    "intro": "IfMail adalah layanan email sementara gratis dan open-source yang dirancang untuk melindungi privasi Anda secara online. Dibangun dan dikelola oleh SoftMoe Studio sejak 2024, IfMail membantu pengguna Indonesia dan dunia menjaga kotak masuk asli mereka tetap bersih dari spam dan melindungi identitas mereka.",
+    "sections": {
+      "mission": {
+        "title": "Misi Kami",
+        "description": "Kami percaya setiap orang berhak atas privasi online tanpa harus membayar mahal. IfMail menyediakan alamat email sekali pakai agar Anda bisa mendaftar layanan, menerima kode verifikasi, dan melindungi email asli dari spam serta penjual data — semuanya gratis. Cocok untuk pengguna yang sering registrasi akun di marketplace Indonesia, platform e-commerce, atau layanan online lainnya yang sering mengirim email promosi berlebihan."
+      },
+      "features": {
+        "title": "Fitur Utama",
+        "items": [
+          "Buat alamat email sementara secara instan — tanpa perlu daftar",
+          "Terima email secara real-time melalui jaringan global Cloudflare",
+          "Masa berlaku fleksibel dari 1 jam hingga permanen (Premium)",
+          "Bagikan kotak surat dengan rekan tim melalui tautan yang bisa dibagikan",
+          "Dukungan REST API dan webhook lengkap untuk developer",
+          "Dukungan multi-bahasa (Indonesia & Inggris)",
+          "Dukungan PWA — instal di ponsel seperti aplikasi native"
+        ]
+      },
+      "tech": {
+        "title": "Teknologi",
+        "description": "IfMail dibangun dengan Next.js 15, Cloudflare Workers, Cloudflare D1 (database), dan TypeScript. Dideploy sepenuhnya di jaringan edge Cloudflare — artinya email Anda diproses dekat dengan lokasi Anda, cepat dan aman. Seluruh stack berjalan tanpa server dedicatedmember, memberikan uptime 99,99%."
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "IfMail adalah open source dengan bangga, dibangun di atas proyek MoeMail. Kode sumber tersedia secara publik di GitHub. Kami percaya pada transparansi — Anda dapat mengaudit bagaimana data Anda ditangani, berkontribusi fitur, atau mendeploy instansi Anda sendiri."
+      },
+      "team": {
+        "title": "Tentang SoftMoe Studio",
+        "description": "SoftMoe Studio adalah tim developer indie yang berbasis di Indonesia, membangun alat-alat praktis yang berfokus pada privasi dan produktivitas developer. IfMail telah aktif dikembangkan sejak 2024. Harga Premium tersedia dalam Rupiah (IDR) untuk memudahkan pengguna Indonesia. Kami dapat dihubungi melalui GitHub dan menyambut kontribusi komunitas."
+      }
+    }
+  }
+}

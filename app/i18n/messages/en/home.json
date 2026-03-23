@@ -1,0 +1,80 @@
+{
+  "title": "IfMail",
+  "subtitle": "Free Temporary Email — Create in Seconds",
+  "features": {
+    "privacy": {
+      "title": "Privacy Protection",
+      "description": "Protect your real email address from spam, data brokers, and unwanted marketing lists. When you sign up for a new service using a temporary IfMail address, your personal inbox stays clean — even if the service sells your data or suffers a breach. Keep your identity private and your real inbox spam-free, permanently."
+    },
+    "instant": {
+      "title": "Email Sharing",
+      "description": "Share your temporary mailbox instantly with teammates, clients, or collaborators using a single link. Anyone with the share link can view incoming emails in real-time — no account or login required. Perfect for team testing, verifying account confirmations together, or letting someone access a verification code."
+    },
+    "expiry": {
+      "title": "Auto Expiry",
+      "description": "Temporary emails automatically self-destruct when their timer runs out — choose from 1 hour, 24 hours, or up to 3 days. Once expired, all messages are permanently deleted from our servers with no manual cleanup needed. No lingering data, no forgotten inboxes — upgrade to Premium for permanent addresses that never expire."
+    },
+    "openapi": {
+      "title": "Open API",
+      "description": "Access your temporary mailboxes programmatically via our full REST/OpenAPI interface — built for QA engineers, developers, and automation teams. Create inboxes, check messages, and clean up test data with simple HTTP requests from any language or CI/CD pipeline. API Key access is included with Premium."
+    }
+  },
+  "actions": {
+    "enterMailbox": "Enter Mailbox",
+    "getStarted": "Get Started"
+  },
+  "definition": {
+    "title": "What is IfMail?",
+    "body": "IfMail is a free temporary email service (also known as disposable email or throwaway email) that creates short-lived email addresses instantly — no account, no phone number, and no personal information required. Simply choose a username and domain, and your inbox is ready to receive emails in seconds. Addresses auto-expire after a set period you choose: from 1 hour up to 72 hours on the Free plan, or permanently on Premium. When the timer runs out, your address and all messages are automatically and permanently deleted from our servers — leaving no trace. Free users get 3 email creation credits, while Premium users get unlimited email addresses that never expire, plus full REST API access and webhook notifications. IfMail is built on Cloudflare Workers and deployed across Cloudflare's global edge network, meaning your emails are processed fast and securely. All email content is encrypted at rest using AES-256-GCM. The entire project is open source and available on GitHub, so you can audit exactly how your data is handled."
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "step1": {
+      "title": "Create Email",
+      "description": "Choose any available username and pick from multiple domains to generate your unique temporary address in seconds. No registration, no phone number, and no personal information required — just click and your inbox is ready immediately."
+    },
+    "step2": {
+      "title": "Receive Emails",
+      "description": "Emails sent to your temporary address arrive in real-time, powered by Cloudflare's global edge network. Read full message content, including HTML emails, directly in your browser or access everything through the API."
+    },
+    "step3": {
+      "title": "Auto Expires",
+      "description": "When the expiry time arrives, your temporary email and all its messages are automatically and permanently deleted from our servers — leaving no trace. Need longer? Upgrade to Premium for permanent addresses that never expire."
+    }
+  },
+  "plans": {
+    "title": "Choose Your Plan",
+    "subtitle": "Get started for free or go unlimited with Premium",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "cta": "Get Started",
+      "currentPlan": "Current Plan"
+    },
+    "premium": {
+      "name": "Premium",
+      "badge": "Popular",
+      "price": "Rp 25,000",
+      "period": "/mo",
+      "cta": "Upgrade",
+      "currentPlan": "Current Plan"
+    },
+    "features": {
+      "emailCredits": "3 email creation credits",
+      "readInbox": "Read inbox & messages",
+      "expiry3d": "Up to 3-day expiry",
+      "credential": "Auto-login credential link",
+      "basicShare": "Basic email sharing",
+      "limitedDomains": "3 domains only",
+      "sendEmail": "Send email (2/day)",
+      "permanent": "Permanent email addresses",
+      "apiKey": "API Key access",
+      "webhook": "Webhook notifications",
+      "unlimitedCreate": "Unlimited email creation",
+      "unlimitedExpiry": "Unlimited expiry duration",
+      "allShare": "All sharing options",
+      "allDomains": "All domains available",
+      "sendEmailPremium": "Send email (5/day)"
+    }
+  }
+}

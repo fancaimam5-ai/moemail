@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "IfMail"
+  },
+  "actions": {
+    "ok": "OK",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "delete": "Hapus"
+  },
+  "nav": {
+    "home": "Beranda",
+    "login": "Masuk",
+    "profile": "Profil",
+    "logout": "Keluar",
+    "backToMailbox": "Kembali ke Kotak Surat"
+  },
+  "theme": {
+    "toggle": "Ganti tema"
+  },
+  "github": "Dapatkan Kode Sumber",
+  "footer": {
+    "description": "Alamat email sekali pakai yang aman untuk melindungi privasi Anda. Dibangun di Cloudflare untuk kecepatan dan keandalan.",
+    "links": "Tautan Cepat",
+    "home": "Beranda",
+    "login": "Masuk",
+    "pricing": "Harga",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Syarat & Ketentuan",
+    "about": "Tentang",
+    "apiDocs": "Dokumentasi API",
+    "openSource": "Open Source",
+    "openSourceDesc": "IfMail adalah open source dan dibangun dengan teknologi modern. Kontribusi sangat diterima.",
+    "rights": "Hak cipta dilindungi.",
+    "madeWith": "Dibuat dengan",
+    "by": "oleh MoeMail"
+  },
+  "notFound": {
+    "title": "Halaman Tidak Ditemukan",
+    "description": "Halaman yang Anda cari tidak ada atau telah dipindahkan.",
+    "backHome": "Kembali ke Beranda"
+  }
+}

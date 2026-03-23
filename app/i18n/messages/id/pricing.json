@@ -1,0 +1,77 @@
+{
+  "title": "Pilih Paket Anda",
+  "subtitle": "Mulai gratis atau tanpa batas dengan Premium",
+  "unlimited": "Tidak Terbatas",
+  "freeDomains": "3 domain",
+  "allDomainsCount": "Semua domain",
+  "free": {
+    "name": "Gratis",
+    "price": "$0",
+    "description": "Cocok untuk penggunaan cepat dan sekali pakai. Dapatkan 3 kredit pembuatan email dengan akses 3 domain.",
+    "cta": "Mulai Gratis",
+    "currentPlan": "Paket Saat Ini"
+  },
+  "premium": {
+    "name": "Premium",
+    "badge": "Nilai Terbaik",
+    "price": "Rp 25.000",
+    "period": "/bulan",
+    "description": "Pembuatan email tanpa batas, semua domain, alamat permanen, akses API, dan lebih banyak lagi.",
+    "cta": "Upgrade Sekarang",
+    "currentPlan": "Paket Saat Ini"
+  },
+  "comparison": {
+    "title": "Perbandingan Fitur",
+    "feature": "Fitur",
+    "rows": {
+      "createEmails": "Pembuatan email",
+      "readInbox": "Baca kotak masuk & pesan",
+      "maxExpiry": "Kedaluwarsa maksimum",
+      "permanentEmail": "Email permanen",
+      "emailSharing": "Berbagi email",
+      "permanentShare": "Tautan berbagi permanen",
+      "credential": "Kredensial auto-login",
+      "apiKey": "Akses API Key",
+      "webhook": "Notifikasi Webhook",
+      "allDomains": "Domain tersedia",
+      "sendEmail": "Batas kirim email"
+    }
+  },
+  "faq": {
+    "title": "Pertanyaan yang Sering Diajukan",
+    "items": {
+      "whatIsIfMail": {
+        "q": "Apa itu IfMail dan bagaimana cara kerjanya?",
+        "a": "IfMail adalah layanan email sementara gratis yang membuat alamat email sekali pakai secara instan — tanpa akun atau nomor telepon. Anda cukup pilih nama pengguna dan domain, lalu kotak masuk sementara Anda siap menerima email dalam hitungan detik. Email dikirim secara real-time melalui jaringan edge global Cloudflare. Saat waktu kedaluwarsa yang Anda pilih tiba (dari 1 jam hingga 72 jam untuk Gratis, atau permanen untuk Premium), alamat dan semua pesan otomatis dihapus dari server kami. Pengguna gratis mendapat 3 alamat email, sedangkan pengguna Premium mendapat alamat tak terbatas dengan penyimpanan permanen, akses API, dan notifikasi webhook."
+      },
+      "creditRefund": {
+        "q": "Apa yang terjadi jika saya menghapus kotak surat?",
+        "a": "Menghapus kotak surat TIDAK mengembalikan kredit pembuatan Anda. Setiap pembuatan email menggunakan satu kredit secara permanen, terlepas dari apakah kotak surat tersebut kemudian dihapus atau kedaluwarsa. Artinya jika Anda membuat 3 email di paket Gratis dan menghapus semuanya, kredit Anda tetap nol. Untuk mendapatkan lebih banyak alamat email, Anda bisa upgrade ke Premium untuk pembuatan email tanpa batas, atau buat akun baru."
+      },
+      "premiumExpire": {
+        "q": "Apa yang terjadi jika langganan Premium saya berakhir?",
+        "a": "Saat paket Premium berakhir, kotak surat dan alamat email permanen Anda yang sudah ada akan tetap berfungsi normal — Anda tidak akan kehilangan email yang sudah ada. Namun, Anda tidak dapat membuat alamat email baru jika sudah menggunakan 3 kredit gratis. API key dan webhook Anda juga akan berhenti berfungsi hingga Anda memperbarui. Email permanen yang dibuat saat masih Premium tetap aktif dan terus menerima pesan."
+      },
+      "guestLimit": {
+        "q": "Bisakah saya menggunakan IfMail tanpa membuat akun?",
+        "a": "Ya! IfMail menyediakan akses tamu yang memungkinkan Anda membuat 1 alamat email sementara tanpa registrasi apa pun. Email tamu berlaku selama 3 hari lalu otomatis kedaluwarsa. Jika butuh fleksibilitas lebih, Anda bisa mendaftar akun gratis untuk mendapatkan 3 kredit pembuatan email dengan kedaluwarsa hingga 72 jam. Tidak perlu nomor telepon atau informasi pribadi untuk mendaftar — cukup pilih username dan password."
+      },
+      "howUpgrade": {
+        "q": "Bagaimana cara upgrade ke Premium?",
+        "a": "Klik tombol 'Upgrade Sekarang' dan selesaikan pembayaran melalui payment gateway DOKU yang aman. Paket Premium Anda akan langsung aktif setelah pembayaran dikonfirmasi. Premium seharga Rp 25.000/bulan dan mencakup pembuatan email tanpa batas, alamat permanen, akses API key, notifikasi webhook, dan semua domain yang tersedia."
+      },
+      "cancelPremium": {
+        "q": "Bisakah saya membatalkan langganan Premium?",
+        "a": "Ya, hubungi admin untuk membatalkan. Email Anda yang sudah ada akan tetap aktif, tetapi Anda akan kembali ke batas paket Gratis untuk pembuatan baru. Tidak ada komitmen jangka panjang yang diperlukan."
+      },
+      "isItSafe": {
+        "q": "Apakah IfMail aman dan privat digunakan?",
+        "a": "IfMail dibangun sepenuhnya di atas infrastruktur enterprise Cloudflare yang menyediakan perlindungan DDoS dan keamanan edge global. Semua konten email dienkripsi saat disimpan menggunakan enkripsi AES-256-GCM. Email sementara dihapus permanen dari server kami saat kedaluwarsa — kami tidak menyimpan salinan cadangan. Seluruh proyek bersifat open source, sehingga Anda bisa mengaudit kode sendiri di GitHub untuk memverifikasi cara data Anda ditangani."
+      },
+      "apiAccess": {
+        "q": "Apakah IfMail memiliki API untuk developer?",
+        "a": "Ya, IfMail menyediakan REST API lengkap untuk developer dan tim otomasi QA. Dengan API key Premium, Anda bisa membuat kotak masuk sementara, melihat dan membaca pesan, menghapus email, dan mengelola kotak surat secara programatik dari bahasa pemrograman atau pipeline CI/CD apa pun. API juga mendukung notifikasi webhook agar aplikasi Anda menerima notifikasi real-time saat email baru masuk. Dokumentasi API lengkap tersedia di if-mail.tech/docs."
+      }
+    }
+  }
+}

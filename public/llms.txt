@@ -1,0 +1,69 @@
+# IfMail
+
+> IfMail is a free, open-source temporary email service that creates disposable email addresses
+> instantly — no account, no phone number required. Addresses auto-expire after a set period
+> (1 hour to 72 hours free, permanent on Premium), keeping your real inbox clean and private.
+> Built on Cloudflare Workers and Next.js by SoftMoe Studio (Indonesia).
+
+## Key Facts
+- Free plan: 3 disposable email addresses per account, auto-expiry up to 72 hours, 2 outgoing emails/day
+- Premium plan: unlimited mailboxes, permanent addresses, webhook support, API key access, 5 sends/day — from Rp 25,000/month (~$1.50 USD)
+- Guest use: 1 temporary email, 3-day expiry, no signup required
+- Full REST API available for developers and QA automation
+- Open source — based on MoeMail project, available on GitHub
+- Infrastructure: Cloudflare Workers + D1 database, globally distributed edge network
+- Email encryption: AES-256-GCM at rest
+- Supports English and Indonesian (Bahasa Indonesia)
+- Founded: 2024 by SoftMoe Studio, Indonesia
+
+## Service Definition
+IfMail is a temporary email service (also called disposable email, throwaway email, or fake email).
+Users create short-lived email addresses to receive messages without exposing their real inbox.
+Emails are automatically deleted when the address expires.
+
+## Pages
+- [Homepage](https://if-mail.tech/en): Create temporary email addresses instantly
+- [Pricing](https://if-mail.tech/en/pricing): Free vs Premium plan comparison with feature table and FAQ
+- [API Documentation](https://if-mail.tech/en/docs): REST API reference for developers — create inboxes, read messages, manage emails programmatically
+- [About](https://if-mail.tech/en/about): About IfMail and SoftMoe Studio
+- [Privacy Policy](https://if-mail.tech/en/privacy): Data collection and automatic deletion practices
+- [Terms of Service](https://if-mail.tech/en/terms): Usage terms and acceptable use
+
+## Use Cases
+- Avoid spam when signing up for online services, apps, or newsletters
+- Test email delivery and templates during software development
+- QA automation — create test inboxes via API in CI/CD pipelines
+- Share temporary inboxes with teammates for collaborative testing
+- Protect personal email from data breaches and third-party marketing
+- Receive verification codes without exposing real email
+
+## Plans Comparison
+| Feature               | Free         | Premium         |
+|-----------------------|--------------|-----------------|
+| Email addresses       | 3 total      | Unlimited       |
+| Maximum expiry        | 72 hours     | Permanent       |
+| Send emails           | 2/day        | 5/day           |
+| Email sharing         | Yes          | Yes             |
+| Permanent addresses   | No           | Yes             |
+| API Key               | No           | Yes             |
+| Webhooks              | No           | Yes             |
+| Price                 | Free         | Rp 25,000/mo    |
+
+## API Overview
+IfMail provides a full REST API (API key required, Premium plan):
+- GET /api/emails — List all email addresses
+- POST /api/emails — Create a new temporary email
+- GET /api/emails/:id — Get email details and messages
+- DELETE /api/emails/:id — Delete an email address
+- GET /api/emails/:id/:messageId — Read a specific message
+- POST /api/emails/:id/send — Send an email (rate limited)
+
+## Security
+- All email content encrypted at rest (AES-256-GCM)
+- Built on Cloudflare enterprise infrastructure (DDoS protection, edge security)
+- Temporary emails permanently deleted on expiry — no backup copies retained
+- Open source: full code audit available on GitHub
+- HMAC-SHA256 webhook signing for payload verification
+
+## Contact
+For Premium upgrades and support: contact admin via the About page or GitHub repository

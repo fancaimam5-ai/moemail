@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "IfMail"
+  },
+  "actions": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete"
+  },
+  "nav": {
+    "home": "Home",
+    "login": "Login",
+    "profile": "Profile",
+    "logout": "Logout",
+    "backToMailbox": "Back to Mailbox"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "github": "Get Source Code",
+  "footer": {
+    "description": "Secure, disposable email addresses to protect your privacy. Built on Cloudflare for speed and reliability.",
+    "links": "Quick Links",
+    "home": "Home",
+    "login": "Login",
+    "pricing": "Pricing",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "about": "About",
+    "apiDocs": "API Docs",
+    "openSource": "Open Source",
+    "openSourceDesc": "IfMail is open source and built with modern technologies. Contributions are welcome.",
+    "rights": "All rights reserved.",
+    "madeWith": "Made with",
+    "by": "by MoeMail"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  }
+}

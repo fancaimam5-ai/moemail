@@ -1,0 +1,77 @@
+{
+  "title": "Choose Your Plan",
+  "subtitle": "Get started for free or go unlimited with Premium",
+  "unlimited": "Unlimited",
+  "freeDomains": "3 domains",
+  "allDomainsCount": "All domains",
+  "free": {
+    "name": "Free",
+    "price": "$0",
+    "description": "Perfect for quick, one-time use. Get 3 email creation credits with access to 3 domains.",
+    "cta": "Get Started Free",
+    "currentPlan": "Current Plan"
+  },
+  "premium": {
+    "name": "Premium",
+    "badge": "Best Value",
+    "price": "Rp 25,000",
+    "period": "/month",
+    "description": "Unlimited email creation, all domains, permanent addresses, API access, and more.",
+    "cta": "Upgrade Now",
+    "currentPlan": "Current Plan"
+  },
+  "comparison": {
+    "title": "Feature Comparison",
+    "feature": "Feature",
+    "rows": {
+      "createEmails": "Email creation",
+      "readInbox": "Read inbox & messages",
+      "maxExpiry": "Maximum expiry",
+      "permanentEmail": "Permanent email",
+      "emailSharing": "Email sharing",
+      "permanentShare": "Permanent share links",
+      "credential": "Auto-login credential",
+      "apiKey": "API Key access",
+      "webhook": "Webhook notifications",
+      "allDomains": "Available domains",
+      "sendEmail": "Send email limit"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": {
+      "whatIsIfMail": {
+        "q": "What is IfMail and how does it work?",
+        "a": "IfMail is a free temporary email service that creates disposable email addresses instantly — no account or phone number required. You choose a username and domain, and your temporary inbox is ready to receive emails in seconds. Emails are delivered in real-time via Cloudflare's global edge network. When the expiry time you selected arrives (from 1 hour to 72 hours on Free, or permanent on Premium), your address and all messages are automatically deleted from our servers. Free users get 3 email addresses, while Premium users get unlimited addresses with permanent retention, API access, and webhook notifications."
+      },
+      "creditRefund": {
+        "q": "What happens when I delete a mailbox?",
+        "a": "Deleting a mailbox does NOT restore your creation credits. Each email creation permanently uses one credit, regardless of whether the mailbox is later deleted or expires. This means if you created 3 emails on the Free plan and delete all of them, you will have zero credits remaining. To get more email addresses, you can upgrade to Premium for unlimited email creation, or create a new account."
+      },
+      "premiumExpire": {
+        "q": "What happens if my Premium subscription expires?",
+        "a": "When your Premium plan expires, your existing mailboxes and permanent email addresses will continue to work normally — you won't lose any existing emails. However, you will no longer be able to create new email addresses if you've already used your 3 free credits. Your API keys and webhooks will also stop working until you renew. Permanent emails you created while on Premium will remain active and continue to receive messages."
+      },
+      "guestLimit": {
+        "q": "Can I use IfMail without creating an account?",
+        "a": "Yes! IfMail offers guest access that lets you create 1 temporary email address without any signup or registration. The guest email lasts for 3 days and then auto-expires. If you need more flexibility, you can sign up for a free account to get 3 email creation credits with up to 72-hour expiry. No phone number or personal information is required to register — just pick a username and password."
+      },
+      "howUpgrade": {
+        "q": "How do I upgrade to Premium?",
+        "a": "Click the 'Upgrade Now' button and complete the payment through our secure DOKU payment gateway. Your Premium plan will be activated instantly after payment confirmation. Premium costs Rp 25,000/month (approximately $1.50 USD) and includes unlimited email creation, permanent addresses, API key access, webhook notifications, and all available domains."
+      },
+      "cancelPremium": {
+        "q": "Can I cancel my Premium subscription?",
+        "a": "Yes, contact the admin to cancel. Your existing emails will remain active, but you'll return to Free plan limits for new creations. No long-term commitment required."
+      },
+      "isItSafe": {
+        "q": "Is IfMail safe and private to use?",
+        "a": "IfMail is built entirely on Cloudflare's enterprise-grade infrastructure, which provides DDoS protection and global edge security. All email content is encrypted at rest using AES-256-GCM encryption. Temporary emails are permanently deleted from our servers when they expire — we keep no backup copies. The entire project is open source, so you can audit the code yourself on GitHub to verify exactly how your data is handled."
+      },
+      "apiAccess": {
+        "q": "Does IfMail have an API for developers?",
+        "a": "Yes, IfMail provides a full REST API for developers and QA automation teams. With a Premium API key, you can create temporary inboxes, list and read messages, delete emails, and manage your mailboxes programmatically from any language or CI/CD pipeline. The API also supports webhook notifications so your application can receive real-time alerts when new emails arrive. Full API documentation is available at if-mail.tech/docs."
+      }
+    }
+  }
+}

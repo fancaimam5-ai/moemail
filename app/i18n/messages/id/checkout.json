@@ -1,0 +1,53 @@
+{
+  "title": "Upgrade ke Premium",
+  "subtitle": "Selesaikan pembayaran untuk membuka semua fitur",
+  "selectPlan": "Pilih Paket Anda",
+  "noPlans": "Tidak ada paket premium tersedia. Silakan hubungi admin.",
+  "payNow": "Bayar Sekarang",
+  "processing": "Membuat pembayaran...",
+  "securedBy": "Diamankan oleh DOKU Payment Gateway",
+  "tryAgain": "Coba Lagi",
+  "features": {
+    "unlimitedEmails": "Pembuatan email tanpa batas",
+    "permanentAddress": "Alamat email permanen",
+    "allDomains": "Akses semua domain",
+    "apiAccess": "Akses API Key",
+    "webhook": "Notifikasi Webhook",
+    "sendLimit": "Batas kirim 5 email/hari"
+  },
+  "pending": {
+    "title": "Menunggu Pembayaran",
+    "description": "Selesaikan pembayaran di halaman DOKU. Halaman ini akan diperbarui otomatis setelah pembayaran dikonfirmasi.",
+    "openPayment": "Buka Halaman Pembayaran",
+    "waiting": "Memeriksa status pembayaran..."
+  },
+  "success": {
+    "title": "Pembayaran Berhasil!",
+    "description": "Paket Premium Anda sekarang aktif. Nikmati pembuatan email tanpa batas dan semua fitur premium!",
+    "goToDashboard": "Ke Dashboard"
+  },
+  "expired": {
+    "title": "Pembayaran Kedaluwarsa",
+    "description": "Sesi pembayaran Anda telah kedaluwarsa. Silakan coba lagi untuk menyelesaikan pembelian."
+  },
+  "failed": {
+    "title": "Pembayaran Gagal",
+    "description": "Terjadi kesalahan pada pembayaran Anda. Silakan coba lagi atau hubungi dukungan."
+  },
+  "history": {
+    "title": "Riwayat Pembayaran",
+    "invoice": "Invoice",
+    "plan": "Paket",
+    "amount": "Jumlah",
+    "method": "Metode",
+    "status": "Status",
+    "date": "Tanggal",
+    "paidAt": "Dibayar",
+    "noPayments": "Belum ada riwayat pembayaran.",
+    "statusPending": "Menunggu",
+    "statusPaid": "Dibayar",
+    "statusExpired": "Kedaluwarsa",
+    "statusFailed": "Gagal",
+    "page": "Halaman {page} dari {totalPages}"
+  }
+}

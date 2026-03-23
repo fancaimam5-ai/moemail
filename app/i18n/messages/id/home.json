@@ -1,0 +1,80 @@
+{
+  "title": "IfMail",
+  "subtitle": "Email Sementara Gratis — Buat dalam Hitungan Detik",
+  "features": {
+    "privacy": {
+      "title": "Perlindungan Privasi",
+      "description": "Lindungi alamat email asli Anda dari spam, penjual data, dan daftar pemasaran yang tidak diinginkan. Saat mendaftar layanan baru menggunakan alamat IfMail sementara, kotak masuk pribadi Anda tetap bersih — meski layanan tersebut menjual data atau mengalami kebocoran. Jaga identitas Anda tetap privat dan kotak masuk asli Anda bebas spam selamanya."
+    },
+    "instant": {
+      "title": "Berbagi Email",
+      "description": "Bagikan kotak surat sementara Anda secara instan kepada rekan tim, klien, atau kolaborator menggunakan satu tautan. Siapa pun dengan tautan tersebut dapat melihat email masuk secara real-time — tanpa akun atau login. Cocok untuk pengujian tim, verifikasi konfirmasi akun bersama, atau memberikan akses kode verifikasi kepada orang lain."
+    },
+    "expiry": {
+      "title": "Kedaluwarsa Otomatis",
+      "description": "Email sementara otomatis terhapus saat waktu habis — pilih antara 1 jam, 24 jam, hingga 3 hari. Setelah kedaluwarsa, semua pesan dihapus permanen dari server kami tanpa perlu dibersihkan manual. Tidak ada data tersisa, tidak ada kotak masuk yang terlupakan — upgrade ke Premium untuk alamat permanen yang tidak pernah kedaluwarsa."
+    },
+    "openapi": {
+      "title": "Open API",
+      "description": "Akses kotak surat sementara Anda secara programatik melalui antarmuka REST/OpenAPI lengkap — dirancang untuk engineer QA, developer, dan tim otomasi. Buat kotak masuk, cek pesan, dan bersihkan data uji coba dengan permintaan HTTP sederhana dari bahasa atau pipeline CI/CD mana pun. Akses API Key tersedia di paket Premium."
+    }
+  },
+  "actions": {
+    "enterMailbox": "Buka Kotak Surat",
+    "getStarted": "Mulai Sekarang"
+  },
+  "definition": {
+    "title": "Apa itu IfMail?",
+    "body": "IfMail adalah layanan email sementara gratis (juga dikenal sebagai email sekali pakai atau disposable email) yang membuat alamat email berdurasi pendek secara instan — tanpa akun, tanpa nomor telepon, dan tanpa informasi pribadi. Cukup pilih nama pengguna dan domain, maka kotak masuk Anda siap menerima email dalam hitungan detik. Alamat otomatis kedaluwarsa sesuai periode yang Anda pilih: dari 1 jam hingga 72 jam untuk paket Gratis, atau permanen untuk Premium. Saat waktu habis, alamat dan semua pesan otomatis dihapus permanen dari server kami — tanpa meninggalkan jejak. Pengguna gratis mendapat 3 kredit pembuatan email, sementara pengguna Premium mendapat alamat email tak terbatas yang tidak pernah kedaluwarsa, plus akses REST API lengkap dan notifikasi webhook. IfMail dibangun di atas Cloudflare Workers dan di-deploy di seluruh jaringan edge global Cloudflare, sehingga email Anda diproses dengan cepat dan aman. Semua konten email dienkripsi saat disimpan menggunakan AES-256-GCM. Seluruh proyek bersifat open source dan tersedia di GitHub, sehingga Anda bisa mengaudit cara data Anda ditangani."
+  },
+  "howItWorks": {
+    "title": "Cara Kerja",
+    "step1": {
+      "title": "Buat Email",
+      "description": "Pilih nama pengguna yang tersedia dan pilih dari beberapa domain untuk membuat alamat sementara unik Anda dalam hitungan detik. Tidak perlu registrasi, nomor telepon, maupun data pribadi — cukup klik dan kotak masuk Anda langsung siap digunakan."
+    },
+    "step2": {
+      "title": "Terima Email",
+      "description": "Email yang dikirim ke alamat sementara Anda masuk secara real-time, didukung jaringan edge global Cloudflare. Baca isi pesan lengkap termasuk email HTML langsung di browser, atau akses semuanya melalui API."
+    },
+    "step3": {
+      "title": "Otomatis Kedaluwarsa",
+      "description": "Saat waktu kedaluwarsa tiba, email sementara dan semua pesannya otomatis dihapus permanen dari server kami — tanpa jejak tersisa. Butuh lebih lama? Upgrade ke Premium untuk alamat permanen yang tidak pernah kedaluwarsa."
+    }
+  },
+  "plans": {
+    "title": "Pilih Paket Anda",
+    "subtitle": "Mulai gratis atau tanpa batas dengan Premium",
+    "free": {
+      "name": "Gratis",
+      "price": "Rp 0",
+      "cta": "Mulai Sekarang",
+      "currentPlan": "Paket Saat Ini"
+    },
+    "premium": {
+      "name": "Premium",
+      "badge": "Populer",
+      "price": "Rp 25.000",
+      "period": "/bln",
+      "cta": "Upgrade",
+      "currentPlan": "Paket Saat Ini"
+    },
+    "features": {
+      "emailCredits": "3 kredit pembuatan email",
+      "readInbox": "Baca kotak surat & pesan",
+      "expiry3d": "Maksimal kedaluwarsa 3 hari",
+      "credential": "Link auto-login credential",
+      "basicShare": "Berbagi email dasar",
+      "limitedDomains": "Hanya 3 domain",
+      "sendEmail": "Kirim email (2/hari)",
+      "permanent": "Alamat email permanen",
+      "apiKey": "Akses API Key",
+      "webhook": "Notifikasi Webhook",
+      "unlimitedCreate": "Pembuatan email tanpa batas",
+      "unlimitedExpiry": "Durasi kedaluwarsa tanpa batas",
+      "allShare": "Semua opsi berbagi",
+      "allDomains": "Semua domain tersedia",
+      "sendEmailPremium": "Kirim email (5/hari)"
+    }
+  }
+}

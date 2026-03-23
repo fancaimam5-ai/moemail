@@ -1,0 +1,27 @@
+import { NextResponse } from "next/server"
+import { auth } from "@/lib/auth"
+import { checkSendPermission } from "@/lib/send-permissions"
+
+export async function GET() {
+  try {
+    const session = await auth()
+    if (!session?.user?.id) {
+      return NextResponse.json({
+        canSend: false,
+        error: "Unauthorized"
+      })
+    }
+    const result = await checkSendPermission(session.user.id)
+    
+    return NextResponse.json(result)
+  } catch (error) {
+    console.error('Failed to check send permission:', error)
+    return NextResponse.json(
+      { 
+        canSend: false, 
+        error: "Permission check failed"
+      },
+      { status: 500 }
+    )
+  }
+} 

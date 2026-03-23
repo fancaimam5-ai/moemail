@@ -1,0 +1,113 @@
+{
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: March 2026",
+    "intro": "At IfMail, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your information when you use our temporary email service.",
+    "sections": {
+      "collect": {
+        "title": "Information We Collect",
+        "items": [
+          "Account information (username, email) when you register",
+          "Temporary email addresses you create",
+          "Email messages received by your temporary addresses",
+          "Usage data such as access times and IP addresses"
+        ]
+      },
+      "use": {
+        "title": "How We Use Your Information",
+        "items": [
+          "To provide and maintain the temporary email service",
+          "To manage your account and authentication",
+          "To improve our service and user experience",
+          "To communicate important service updates"
+        ]
+      },
+      "retention": {
+        "title": "Data Retention",
+        "description": "Temporary emails and their contents are automatically deleted after their expiration period (1 hour, 24 hours, 3 days, or as configured). Account data is retained as long as you maintain an active account."
+      },
+      "security": {
+        "title": "Data Security",
+        "description": "We implement industry-standard security measures to protect your data. Our service is built on Cloudflare infrastructure, which provides enterprise-grade security and DDoS protection."
+      },
+      "thirdParty": {
+        "title": "Third-Party Services",
+        "description": "We use Cloudflare for infrastructure, hosting, and email routing. We do not sell or share your personal data with third parties for marketing purposes."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "description": "If you have questions about this Privacy Policy, please contact us through our admin channels."
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: March 2026",
+    "intro": "By using IfMail, you agree to these Terms of Service. Please read them carefully.",
+    "sections": {
+      "service": {
+        "title": "Service Description",
+        "description": "IfMail provides temporary, disposable email addresses for privacy protection. The service allows users to create temporary mailboxes that automatically expire after a set period."
+      },
+      "acceptable": {
+        "title": "Acceptable Use",
+        "items": [
+          "You may use the service for legitimate privacy protection purposes",
+          "You must not use the service for spam, phishing, or illegal activities",
+          "You must not attempt to abuse or exploit the service",
+          "You must not use the service to harass or harm others"
+        ]
+      },
+      "accounts": {
+        "title": "Accounts",
+        "description": "Registered accounts provide additional features like managing multiple temporary emails. You are responsible for maintaining the security of your account credentials."
+      },
+      "limitations": {
+        "title": "Service Limitations",
+        "description": "Temporary emails are not permanent. We do not guarantee delivery of all emails. The service is provided 'as is' without warranties of any kind."
+      },
+      "termination": {
+        "title": "Termination",
+        "description": "We reserve the right to suspend or terminate accounts that violate these terms. You may delete your account at any time."
+      },
+      "changes": {
+        "title": "Changes to Terms",
+        "description": "We may update these terms from time to time. Continued use of the service after changes constitutes acceptance of the new terms."
+      }
+    }
+  },
+  "about": {
+    "title": "About IfMail",
+    "intro": "IfMail is a free, open-source temporary email service designed to protect your privacy online. Built and maintained by SoftMoe Studio since 2024, IfMail helps thousands of users keep their real inbox clean and their identity private.",
+    "sections": {
+      "mission": {
+        "title": "Our Mission",
+        "description": "We believe everyone deserves privacy online without paying for it. IfMail provides disposable email addresses so you can sign up for services, receive verification codes, and protect your real email from spam and data brokers — all without cost. Whether you're a developer testing integrations, a privacy-conscious user, or someone tired of inbox clutter, IfMail is built for you."
+      },
+      "features": {
+        "title": "Key Features",
+        "items": [
+          "Create temporary email addresses instantly — no signup required",
+          "Receive emails in real-time via Cloudflare's global network",
+          "Flexible expiration from 1 hour up to permanent (Premium)",
+          "Share mailboxes with teammates via shareable links",
+          "Full REST API and webhook support for developers",
+          "Multi-language support (English & Indonesian)",
+          "PWA support — install on mobile like a native app"
+        ]
+      },
+      "tech": {
+        "title": "Technology",
+        "description": "IfMail is built with Next.js 15, Cloudflare Workers, Cloudflare D1 (database), and TypeScript. Deployed entirely on Cloudflare's edge network — meaning your emails are processed close to you, fast and secure. The entire stack runs serverless, giving us 99.99% uptime without dedicated servers."
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "IfMail is proudly open source, built on the MoeMail project. The source code is publicly available on GitHub. We believe in transparency — you can audit exactly how your data is handled, contribute features, or deploy your own instance."
+      },
+      "team": {
+        "title": "About SoftMoe Studio",
+        "description": "SoftMoe Studio is an indie developer team based in Indonesia, building practical tools focused on privacy and developer productivity. IfMail has been in active development since 2024. We're reachable on GitHub and welcome community contributions."
+      }
+    }
+  }
+}
