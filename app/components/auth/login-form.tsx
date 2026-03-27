@@ -19,7 +19,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { Loader2, KeyRound, User2, Mail, UserCircle, ArrowLeft, CheckCircle2, AlertCircle, Wand2 } from "lucide-react"
+import { Loader2, KeyRound, User2, Mail, UserCircle, ArrowLeft, CheckCircle2, AlertCircle, Wand2, Phone, MessageCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Turnstile } from "@/components/auth/turnstile"
 import { useSearchParams } from "next/navigation"
@@ -39,9 +39,11 @@ interface FormErrors {
   name?: string
   password?: string
   confirmPassword?: string
+  phone?: string
+  otp?: string
 }
 
-type View = "main" | "forgot-password" | "magic-link" | "register-success" | "forgot-success" | "magic-link-success"
+type View = "main" | "forgot-password" | "forgot-password-whatsapp" | "forgot-password-whatsapp-otp" | "magic-link" | "register-success" | "forgot-success" | "magic-link-success" | "register-whatsapp" | "register-whatsapp-otp"
 
 export function LoginForm({ turnstile }: LoginFormProps) {
   const [username, setUsername] = useState("")
@@ -49,6 +51,9 @@ export function LoginForm({ turnstile }: LoginFormProps) {
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [phone, setPhone] = useState("")
+  const [whatsAppOtp, setWhatsAppOtp] = useState("")
+  const [otpTimer, setOtpTimer] = useState(0)
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<FormErrors>({})
   const [turnstileToken, setTurnstileToken] = useState("")
@@ -97,6 +102,14 @@ export function LoginForm({ turnstile }: LoginFormProps) {
     setTurnstileResetCounter((prev) => prev + 1)
   }, [])
 
+  // OTP timer countdown
+  useEffect(() => {
+    if (otpTimer > 0) {
+      const timer = setTimeout(() => setOtpTimer(otpTimer - 1), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [otpTimer])
+
   const ensureTurnstileSolved = () => {
     if (!turnstileEnabled) return true
     if (turnstileToken) return true
@@ -114,6 +127,8 @@ export function LoginForm({ turnstile }: LoginFormProps) {
     setName("")
     setPassword("")
     setConfirmPassword("")
+    setPhone("")
+    setWhatsAppOtp("")
     setErrors({})
   }
 
@@ -153,6 +168,22 @@ export function LoginForm({ turnstile }: LoginFormProps) {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) newErrors.email = t("errors.emailInvalid")
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
+  }
+
+  const validatePhoneForm = () => {
+    const newErrors: FormErrors = {}
+    const cleaned = phone.replace(/\D/g, "")
+    if (!phone) newErrors.phone = "Nomor telepon wajib diisi"
+    else if (cleaned.length < 10 || cleaned.length > 13) newErrors.phone = "Nomor telepon tidak valid"
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const formatPhoneDisplay = (value: string) => {
+    const cleaned = value.replace(/\D/g, "")
+    if (cleaned.length <= 4) return cleaned
+    if (cleaned.length <= 8) return `${cleaned.slice(0, 4)}-${cleaned.slice(4)}`
+    return `${cleaned.slice(0, 4)}-${cleaned.slice(4, 8)}-${cleaned.slice(8, 12)}`
   }
 
   const handleLogin = async () => {
@@ -304,6 +335,189 @@ export function LoginForm({ turnstile }: LoginFormProps) {
     }
   }
 
+  // WhatsApp forgot password - request OTP
+  const handleWhatsAppForgotRequest = async () => {
+    if (!validatePhoneForm()) return
+
+    setLoading(true)
+    try {
+      const response = await fetch("/api/auth/whatsapp/request-reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone }),
+      })
+
+      const data = await response.json() as { success: boolean; error?: string; expires_in?: number }
+
+      if (!response.ok || !data.success) {
+        toast({
+          title: "Gagal",
+          description: data.error || "Gagal mengirim OTP",
+          variant: "destructive",
+        })
+        setLoading(false)
+        return
+      }
+
+      setOtpTimer(60)
+      setView("forgot-password-whatsapp-otp")
+      setLoading(false)
+    } catch {
+      toast({
+        title: "Gagal",
+        description: "Terjadi kesalahan",
+        variant: "destructive",
+      })
+      setLoading(false)
+    }
+  }
+
+  // WhatsApp forgot password - verify OTP and reset
+  const handleWhatsAppForgotVerify = async () => {
+    if (!whatsAppOtp || whatsAppOtp.length !== 6) {
+      setErrors({ otp: "Masukkan 6 digit kode OTP" })
+      return
+    }
+    if (!password || password.length < 8) {
+      setErrors({ password: t("errors.passwordTooShort") })
+      return
+    }
+    if (password !== confirmPassword) {
+      setErrors({ confirmPassword: t("errors.passwordMismatch") })
+      return
+    }
+
+    setLoading(true)
+    try {
+      const response = await fetch("/api/auth/whatsapp/verify-reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, otp: whatsAppOtp, newPassword: password }),
+      })
+
+      const data = await response.json() as { success: boolean; error?: string }
+
+      if (!response.ok || !data.success) {
+        toast({
+          title: "Gagal",
+          description: data.error || "Verifikasi gagal",
+          variant: "destructive",
+        })
+        setLoading(false)
+        return
+      }
+
+      setView("forgot-success")
+      setLoading(false)
+    } catch {
+      toast({
+        title: "Gagal",
+        description: "Terjadi kesalahan",
+        variant: "destructive",
+      })
+      setLoading(false)
+    }
+  }
+
+  // WhatsApp register - request OTP
+  const handleWhatsAppRegisterRequest = async () => {
+    const newErrors: FormErrors = {}
+    if (!username) newErrors.username = t("errors.usernameRequired")
+    if (username.includes("@")) newErrors.username = t("errors.usernameInvalid")
+    if (!email) newErrors.email = t("errors.emailRequired")
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) newErrors.email = t("errors.emailInvalid")
+    const cleaned = phone.replace(/\D/g, "")
+    if (!phone) newErrors.phone = "Nomor telepon wajib diisi"
+    else if (cleaned.length < 10) newErrors.phone = "Nomor telepon tidak valid"
+    setErrors(newErrors)
+    if (Object.keys(newErrors).length > 0) return
+
+    setLoading(true)
+    try {
+      const response = await fetch("/api/auth/whatsapp/request-register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, email, username }),
+      })
+
+      const data = await response.json() as { success: boolean; error?: string }
+
+      if (!response.ok || !data.success) {
+        toast({
+          title: "Gagal",
+          description: data.error || "Gagal mengirim OTP",
+          variant: "destructive",
+        })
+        setLoading(false)
+        return
+      }
+
+      setOtpTimer(60)
+      setView("register-whatsapp-otp")
+      setLoading(false)
+    } catch {
+      toast({
+        title: "Gagal",
+        description: "Terjadi kesalahan",
+        variant: "destructive",
+      })
+      setLoading(false)
+    }
+  }
+
+  // WhatsApp register - verify OTP and create account
+  const handleWhatsAppRegisterVerify = async () => {
+    if (!whatsAppOtp || whatsAppOtp.length !== 6) {
+      setErrors({ otp: "Masukkan 6 digit kode OTP" })
+      return
+    }
+    if (!password || password.length < 8) {
+      setErrors({ password: t("errors.passwordTooShort") })
+      return
+    }
+    if (password !== confirmPassword) {
+      setErrors({ confirmPassword: t("errors.passwordMismatch") })
+      return
+    }
+
+    setLoading(true)
+    try {
+      const response = await fetch("/api/auth/whatsapp/verify-register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, otp: whatsAppOtp, email, username, name: name.trim(), password }),
+      })
+
+      const data = await response.json() as { success: boolean; error?: string }
+
+      if (!response.ok || !data.success) {
+        toast({
+          title: "Gagal",
+          description: data.error || "Registrasi gagal",
+          variant: "destructive",
+        })
+        setLoading(false)
+        return
+      }
+
+      toast({
+        title: "Berhasil",
+        description: "Akun berhasil dibuat. Silakan login.",
+      })
+      setView("main")
+      setActiveTab("login")
+      clearForm()
+      setLoading(false)
+    } catch {
+      toast({
+        title: "Gagal",
+        description: "Terjadi kesalahan",
+        variant: "destructive",
+      })
+      setLoading(false)
+    }
+  }
+
   const goBack = () => {
     setView("main")
     clearForm()
@@ -397,6 +611,177 @@ export function LoginForm({ turnstile }: LoginFormProps) {
     )
   }
 
+  // WhatsApp register - input form
+  if (view === "register-whatsapp") {
+    return (
+      <Card className="w-[95%] max-w-lg border-2 border-primary/20 shadow-xl shadow-primary/5 backdrop-blur-sm bg-card/80">
+        <CardHeader className="space-y-3">
+          <button onClick={goBack} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors w-fit group">
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            {t("actions.back")}
+          </button>
+          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/40 dark:to-emerald-900/30 flex items-center justify-center shadow-lg shadow-green-500/10">
+            <MessageCircle className="w-7 h-7 text-green-600 dark:text-green-400" />
+          </div>
+          <CardTitle className="text-2xl text-center bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
+            Daftar via WhatsApp
+          </CardTitle>
+          <CardDescription className="text-center">
+            Verifikasi nomor WhatsApp untuk membuat akun
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <div className="space-y-1.5">
+            <div className="relative group">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-green-500 transition-colors">
+                <User2 className="h-4.5 w-4.5" />
+              </div>
+              <Input
+                className={cn("h-10 pl-10 pr-3 bg-muted/30 border-primary/10", errors.username && "border-destructive")}
+                placeholder={t("fields.username")}
+                value={username}
+                onChange={(e) => { setUsername(e.target.value); setErrors({}) }}
+                disabled={loading}
+              />
+            </div>
+            {errors.username && <p className="text-xs text-destructive">{errors.username}</p>}
+          </div>
+
+          <div className="space-y-1.5">
+            <div className="relative group">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-green-500 transition-colors">
+                <Mail className="h-4.5 w-4.5" />
+              </div>
+              <Input
+                className={cn("h-10 pl-10 pr-3 bg-muted/30 border-primary/10", errors.email && "border-destructive")}
+                type="email"
+                placeholder={t("fields.email")}
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); setErrors({}) }}
+                disabled={loading}
+              />
+            </div>
+            {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
+          </div>
+
+          <div className="space-y-1.5">
+            <div className="relative group">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-green-500 transition-colors">
+                <UserCircle className="h-4.5 w-4.5" />
+              </div>
+              <Input
+                className={cn("h-10 pl-10 pr-3 bg-muted/30 border-primary/10", errors.name && "border-destructive")}
+                placeholder={t("fields.name")}
+                value={name}
+                onChange={(e) => { setName(e.target.value); setErrors({}) }}
+                disabled={loading}
+              />
+            </div>
+            {errors.name && <p className="text-xs text-destructive">{errors.name}</p>}
+          </div>
+
+          <div className="space-y-1.5">
+            <div className="relative group">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-green-500 transition-colors">
+                <Phone className="h-4.5 w-4.5" />
+              </div>
+              <Input
+                className={cn("h-10 pl-10 pr-3 bg-muted/30 border-primary/10", errors.phone && "border-destructive")}
+                type="tel"
+                placeholder="08123456789"
+                value={formatPhoneDisplay(phone)}
+                onChange={(e) => { setPhone(e.target.value.replace(/\D/g, "")); setErrors({}) }}
+                disabled={loading}
+                maxLength={16}
+              />
+            </div>
+            {errors.phone && <p className="text-xs text-destructive">{errors.phone}</p>}
+          </div>
+
+          <Button className="w-full h-10 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-600/90 hover:to-emerald-600/90 shadow-lg shadow-green-500/20 hover:shadow-green-500/30 transition-all" onClick={handleWhatsAppRegisterRequest} disabled={loading}>
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Kirim Kode OTP
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // WhatsApp register - OTP verification and password
+  if (view === "register-whatsapp-otp") {
+    return (
+      <Card className="w-[95%] max-w-lg border-2 border-primary/20 shadow-xl shadow-primary/5 backdrop-blur-sm bg-card/80">
+        <CardHeader className="space-y-3">
+          <button onClick={() => setView("register-whatsapp")} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors w-fit group">
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            {t("actions.back")}
+          </button>
+          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/40 dark:to-emerald-900/30 flex items-center justify-center shadow-lg shadow-green-500/10">
+            <CheckCircle2 className="w-7 h-7 text-green-600 dark:text-green-400" />
+          </div>
+          <CardTitle className="text-2xl text-center bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
+            Verifikasi & Buat Akun
+          </CardTitle>
+          <CardDescription className="text-center">
+            Masukkan kode OTP dan buat password
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs text-muted-foreground">Kode OTP (6 digit)</label>
+            <Input
+              className={cn("h-10 text-center text-lg tracking-widest font-mono", errors.otp && "border-destructive")}
+              type="text"
+              placeholder="000000"
+              value={whatsAppOtp}
+              onChange={(e) => { setWhatsAppOtp(e.target.value.replace(/\D/g, "").slice(0, 6)); setErrors({}) }}
+              disabled={loading}
+              maxLength={6}
+            />
+            {errors.otp && <p className="text-xs text-destructive">{errors.otp}</p>}
+            {otpTimer > 0 && <p className="text-xs text-center text-muted-foreground">Kirim ulang dalam {otpTimer}s</p>}
+            {otpTimer === 0 && (
+              <button type="button" onClick={handleWhatsAppRegisterRequest} className="text-xs text-green-600 hover:underline w-full text-center" disabled={loading}>
+                Kirim ulang OTP
+              </button>
+            )}
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs text-muted-foreground">Password</label>
+            <Input
+              className={cn("h-10", errors.password && "border-destructive")}
+              type="password"
+              placeholder="Minimal 8 karakter"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setErrors({}) }}
+              disabled={loading}
+            />
+            {errors.password && <p className="text-xs text-destructive">{errors.password}</p>}
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs text-muted-foreground">Konfirmasi Password</label>
+            <Input
+              className={cn("h-10", errors.confirmPassword && "border-destructive")}
+              type="password"
+              placeholder="Ulangi password"
+              value={confirmPassword}
+              onChange={(e) => { setConfirmPassword(e.target.value); setErrors({}) }}
+              disabled={loading}
+            />
+            {errors.confirmPassword && <p className="text-xs text-destructive">{errors.confirmPassword}</p>}
+          </div>
+
+          <Button className="w-full h-10 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-600/90 hover:to-emerald-600/90 shadow-lg shadow-green-500/20 hover:shadow-green-500/30 transition-all" onClick={handleWhatsAppRegisterVerify} disabled={loading}>
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Buat Akun
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  }
+
   // Forgot password view
   if (view === "forgot-password") {
     return (
@@ -443,6 +828,147 @@ export function LoginForm({ turnstile }: LoginFormProps) {
           <Button className="w-full h-10 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all" onClick={handleForgotPassword} disabled={loading}>
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {t("actions.sendResetLink")}
+          </Button>
+
+          <div className="relative my-3">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-primary/10" />
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-card px-2 text-muted-foreground">atau</span>
+            </div>
+          </div>
+
+          <Button
+            variant="outline"
+            className="w-full h-10 border-green-500/30 hover:bg-green-500/10 hover:border-green-500/50 text-green-600 dark:text-green-400"
+            onClick={() => { setView("forgot-password-whatsapp"); clearForm() }}
+            disabled={loading}
+          >
+            <MessageCircle className="mr-2 h-4 w-4" />
+            Reset via WhatsApp
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // WhatsApp forgot password - phone input
+  if (view === "forgot-password-whatsapp") {
+    return (
+      <Card className="w-[95%] max-w-lg border-2 border-primary/20 shadow-xl shadow-primary/5 backdrop-blur-sm bg-card/80">
+        <CardHeader className="space-y-3">
+          <button onClick={goBack} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors w-fit group">
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            {t("actions.back")}
+          </button>
+          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/40 dark:to-emerald-900/30 flex items-center justify-center shadow-lg shadow-green-500/10">
+            <MessageCircle className="w-7 h-7 text-green-600 dark:text-green-400" />
+          </div>
+          <CardTitle className="text-2xl text-center bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
+            Reset via WhatsApp
+          </CardTitle>
+          <CardDescription className="text-center">
+            Masukkan nomor WhatsApp yang terdaftar
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-1.5">
+            <div className="relative group">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-green-500 transition-colors">
+                <Phone className="h-4.5 w-4.5" />
+              </div>
+              <Input
+                className={cn("h-10 pl-10 pr-3 bg-muted/30 border-primary/10 focus-visible:border-green-500/30 focus-visible:ring-green-500/20 transition-all", errors.phone && "border-destructive focus-visible:ring-destructive")}
+                type="tel"
+                placeholder="08123456789"
+                value={formatPhoneDisplay(phone)}
+                onChange={(e) => { setPhone(e.target.value.replace(/\D/g, "")); setErrors({}) }}
+                disabled={loading}
+                maxLength={16}
+              />
+            </div>
+            {errors.phone && <p className="text-xs text-destructive">{errors.phone}</p>}
+          </div>
+
+          <Button className="w-full h-10 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-600/90 hover:to-emerald-600/90 shadow-lg shadow-green-500/20 hover:shadow-green-500/30 transition-all" onClick={handleWhatsAppForgotRequest} disabled={loading}>
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Kirim Kode OTP
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // WhatsApp forgot password - OTP input and new password
+  if (view === "forgot-password-whatsapp-otp") {
+    return (
+      <Card className="w-[95%] max-w-lg border-2 border-primary/20 shadow-xl shadow-primary/5 backdrop-blur-sm bg-card/80">
+        <CardHeader className="space-y-3">
+          <button onClick={() => setView("forgot-password-whatsapp")} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors w-fit group">
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            {t("actions.back")}
+          </button>
+          <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/40 dark:to-emerald-900/30 flex items-center justify-center shadow-lg shadow-green-500/10">
+            <KeyRound className="w-7 h-7 text-green-600 dark:text-green-400" />
+          </div>
+          <CardTitle className="text-2xl text-center bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
+            Verifikasi & Reset
+          </CardTitle>
+          <CardDescription className="text-center">
+            Masukkan kode OTP dan password baru
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-1.5">
+            <label className="text-xs text-muted-foreground">Kode OTP (6 digit)</label>
+            <Input
+              className={cn("h-10 text-center text-lg tracking-widest font-mono", errors.otp && "border-destructive")}
+              type="text"
+              placeholder="000000"
+              value={whatsAppOtp}
+              onChange={(e) => { setWhatsAppOtp(e.target.value.replace(/\D/g, "").slice(0, 6)); setErrors({}) }}
+              disabled={loading}
+              maxLength={6}
+            />
+            {errors.otp && <p className="text-xs text-destructive">{errors.otp}</p>}
+            {otpTimer > 0 && <p className="text-xs text-center text-muted-foreground">Kirim ulang dalam {otpTimer}s</p>}
+            {otpTimer === 0 && (
+              <button type="button" onClick={handleWhatsAppForgotRequest} className="text-xs text-green-600 hover:underline w-full text-center" disabled={loading}>
+                Kirim ulang OTP
+              </button>
+            )}
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs text-muted-foreground">Password Baru</label>
+            <Input
+              className={cn("h-10", errors.password && "border-destructive")}
+              type="password"
+              placeholder="Minimal 8 karakter"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setErrors({}) }}
+              disabled={loading}
+            />
+            {errors.password && <p className="text-xs text-destructive">{errors.password}</p>}
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="text-xs text-muted-foreground">Konfirmasi Password</label>
+            <Input
+              className={cn("h-10", errors.confirmPassword && "border-destructive")}
+              type="password"
+              placeholder="Ulangi password"
+              value={confirmPassword}
+              onChange={(e) => { setConfirmPassword(e.target.value); setErrors({}) }}
+              disabled={loading}
+            />
+            {errors.confirmPassword && <p className="text-xs text-destructive">{errors.confirmPassword}</p>}
+          </div>
+
+          <Button className="w-full h-10 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-600/90 hover:to-emerald-600/90 shadow-lg shadow-green-500/20 hover:shadow-green-500/30 transition-all" onClick={handleWhatsAppForgotVerify} disabled={loading}>
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Reset Password
           </Button>
         </CardContent>
       </Card>
@@ -767,6 +1293,25 @@ export function LoginForm({ turnstile }: LoginFormProps) {
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {t("actions.register")}
+                </Button>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-primary/10" />
+                  </div>
+                  <div className="relative flex justify-center text-xs">
+                    <span className="bg-card px-2 text-muted-foreground">atau</span>
+                  </div>
+                </div>
+
+                <Button
+                  variant="outline"
+                  className="w-full h-10 border-green-500/30 hover:bg-green-500/10 hover:border-green-500/50 text-green-600 dark:text-green-400"
+                  onClick={() => { setView("register-whatsapp"); clearForm() }}
+                  disabled={loading}
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Daftar via WhatsApp
                 </Button>
               </div>
             </TabsContent>
